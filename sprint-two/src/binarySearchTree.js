@@ -78,7 +78,29 @@ var BinarySearchTree = function(value){
       }
 
   }
-  bsTree.depthFirstLog = function(callback){
+  bsTree.depthFirstLog = function(callback, innerObj){
+
+    var obj;
+
+    if(arguments.length === 1) {
+      obj = bsTree;
+
+    }
+    else {
+      obj = innerObj;
+    }
+
+    // debugger
+
+    callback(obj.value);
+
+    if(obj.left !== null) {
+      bsTree.depthFirstLog(callback, obj.left);
+    }
+
+    if(obj.right !== null) {
+      bsTree.depthFirstLog(callback,obj.right);
+    }
 
   }
   return bsTree;
