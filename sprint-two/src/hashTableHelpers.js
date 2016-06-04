@@ -19,10 +19,21 @@ var LimitedArray = function(limit){
     checkLimit(index);
     return storage[index];
   };
-  limitedArray.set = function(index, value){
+
+  limitedArray.set = function(index, key, value){
     checkLimit(index);
-    storage[index] = value;
+    if(storage[index] === undefined){
+      var obj = {};
+      obj[key] = value;
+      storage[index] = obj;
+    }
+    else{
+      var obj = {};
+      obj[key] = value;
+      extend(storage[index], obj);
+    }
   };
+
   limitedArray.each = function(callback){
     for(var i = 0; i < storage.length; i++){
       callback(storage[i], i, storage);
